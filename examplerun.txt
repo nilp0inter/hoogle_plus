@@ -1,0 +1,25 @@
+stack exec -- hplus generate -f libraries/tier1/base.txt -f libraries/tier1/ghc-prim.txt -m "Data.Int" -m "Data.Maybe" -m "Data.List" -m "Data.Tuple" -m "GHC.List" -m "GHC.Char" -m "Data.Bool"  -m "Text.Show" -m "Data.Eq"
+stack exec -- hplus 'a -> [Maybe a] -> a' --sol-num 2
+stack exec -- hplus 'AWSIp -> [AWSPort]' --sol-num 1 --disable-filter  --disable-demand
+
+---
+
+module Data.AWS
+data AWSIp
+data AWSPort
+scanAWSIp :: AWSIp -> [AWSPort]
+data OpenPort
+data ClosedPort
+portStatus :: AWSPort -> Either ClosedPort OpenPort
+
+---
+root@6faf5b0db748:/home/hoogle_plus# stack exec -- hplus 'AWSIp -> [Either ClosedPort OpenPort]' --sol-num 1 --disable-filter  --disable-demand
+
+*******************SOLUTION*********************
+SOLUTION: Data.List.map Data.AWS.portStatus (Data.AWS.scanAWSIp arg1)
+************************************************
+
+real    0m25.875s
+user    0m25.687s
+sys     0m0.127s
+
